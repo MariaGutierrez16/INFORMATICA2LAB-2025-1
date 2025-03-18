@@ -7,10 +7,11 @@ int ejercicio3();
 int ejercicio5();
 int ejercicio7();
 int ejercicio9();
+int ejercicio11();
 
 int main()
 {
-    ejercicio9();
+    ejercicio11();
     return 0;
 }
 
@@ -79,5 +80,18 @@ int ejercicio9(){
 
     cout << "El perimetro: " << perimetro << endl;
     cout << "el area es : " << area << endl;
+    return 0;
+}
+
+int ejercicio11(){
+    int n;
+    cout << "Ingrese un numero: ";
+    cin >> n;
+
+
+    for (int i=1;i<=10;i++){
+        cout << n << "*" << i << " = " << n * i << endl;
+    }
+
     return 0;
 }
