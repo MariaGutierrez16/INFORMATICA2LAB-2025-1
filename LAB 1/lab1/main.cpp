@@ -8,10 +8,11 @@ int ejercicio5();
 int ejercicio7();
 int ejercicio9();
 int ejercicio11();
+int ejercicio13();
 
 int main()
 {
-    ejercicio11();
+    ejercicio13();
     return 0;
 }
 
@@ -94,4 +95,20 @@ int ejercicio11(){
     }
 
     return 0;
+}
+
+int ejercicio13(){
+
+    int n;
+    cout << "Ingresa un numer: ";
+    cin >> n;
+
+    for (int i=1;i<=n;i++){
+
+        if (n % i == 0)
+
+        cout << i << endl;
+    }
+    return 0;
+
 }
