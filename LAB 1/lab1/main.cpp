@@ -9,10 +9,11 @@ int ejercicio7();
 int ejercicio9();
 int ejercicio11();
 int ejercicio13();
+int ejercicio15();
 
 int main()
 {
-    ejercicio13();
+    ejercicio15();
     return 0;
 }
 
@@ -111,4 +112,19 @@ int ejercicio13(){
     }
     return 0;
 
+}
+
+int ejercicio15(){
+    int n,suma=0;
+
+    do {
+
+        cout << "ingresa un numero: ";
+        cin >> n;
+
+        suma = suma + n;
+    } while (n != 0);
+
+    cout << "La suma es: " << suma << endl;
+    return 0;
 }
