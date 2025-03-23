@@ -13,10 +13,12 @@ int ejercicio15();
 int ejercicio17();
 int ejercicio19();
 void ejercicio21();
+void ejercicio23();
+int ejercicio25();
 
 int main()
 {
-    ejercicio21();
+    ejercicio5();
     return 0;
 }
 
@@ -48,7 +50,7 @@ int ejercicio3(){
 
 int ejercicio5(){
     int a, b;
-    float dividir;
+    double dividir;
     cout << "Ingresa el primer numero: ";
     cin >> a;
     cout << "ingresa el segundo numero: ";
@@ -193,5 +195,45 @@ void ejercicio21(){
 
      cout << letra << endl;
 
+
+}
+
+void ejercicio23(){
+    int n1, n2, a, b, c, mcm;
+    cout << "Ingrese dos numeros: ";
+    cin >> n1 >> n2;
+
+    a = n1;
+    b = n2;
+    while (b != 0) {
+        c = b;
+        b = a % b;
+        a = c;
+    }
+    mcm = (n1 / a) * n2;
+    cout << "El MCM de " << n1 << " y " << n2 << " es " << mcm << "." << endl;
+}
+
+int ejercicio25(){
+    int n,a;
+
+    int c = 1;
+
+
+
+    cout << "Ingresa un numero: ";
+    cin >> n;
+
+    a=n;
+
+    while (n >= 10){
+        n = n /10;
+        c ++;
+
+    }
+
+    cout << " el numero " << a << " tiene " << c << " digitos " << endl;
+
+    return 0;
 
 }
