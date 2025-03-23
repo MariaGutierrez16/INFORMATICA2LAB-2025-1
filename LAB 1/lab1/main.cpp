@@ -9,10 +9,14 @@ int ejercicio7();
 int ejercicio9();
 int ejercicio11();
 int ejercicio13();
+int ejercicio15();
+int ejercicio17();
+int ejercicio19();
+void ejercicio21();
 
 int main()
 {
-    ejercicio13();
+    ejercicio21();
     return 0;
 }
 
@@ -110,5 +114,84 @@ int ejercicio13(){
         cout << i << endl;
     }
     return 0;
+
+}
+
+int ejercicio15(){
+
+    int n , sum = 0;
+
+    do {
+        cout << "Ingresa un numero: ";
+        cin >> n;
+        sum += n;
+    } while (n!= 0);
+
+    cout << "la suma es: " << sum << endl;
+
+    return 0;
+
+}
+
+int ejercicio17(){
+
+    int n =1;
+
+    int mayor = 0;
+
+        while (n !=0){
+        cout << "Ingresa un numero: ";
+        cin >> n;
+
+        if ( n > mayor){
+
+            mayor = n;
+        }
+    }
+
+    cout << " el numero mayor es: " << mayor << endl;
+
+    return 0;
+}
+
+int ejercicio19() {
+    int n;
+    int prim = 0;
+
+    cout << "Ingresa un numero: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        if (n % i == 0) {
+            prim++;
+        }
+    }
+
+    if (prim == 2) {
+        cout << n << " es un numero primo" << endl;
+    } else {
+        cout << n << " no es un numero primo" << endl;
+    }
+
+    return 0;
+}
+
+void ejercicio21(){
+
+    char letra;
+
+    cout << "ingrese una letra: ";
+    cin >> letra;
+
+    if (letra >=   'a' && letra <= 'z'){
+
+       letra -= 32;
+
+     } else if (letra >=  'A' && letra  <= 'Z' ){
+      letra += 32;
+         }
+
+     cout << letra << endl;
+
 
 }
