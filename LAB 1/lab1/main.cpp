@@ -15,10 +15,11 @@ int ejercicio19();
 void ejercicio21();
 void ejercicio23();
 int ejercicio25();
+int ejercicio27();
 
 int main()
 {
-    ejercicio5();
+    ejercicio27();
     return 0;
 }
 
@@ -233,6 +234,42 @@ int ejercicio25(){
     }
 
     cout << " el numero " << a << " tiene " << c << " digitos " << endl;
+
+    return 0;
+
+}
+
+int ejercicio27(){
+
+    int n1,n2;
+    int sum , rest, mult ,div = 0;
+
+    char simb;
+
+    cout << " Ingrese dos numeros: ";
+    cin >> n1 >> n2;
+
+    cout << " Ingrese el simbolo de la operacion que desea realizar: ";
+    cin >> simb;
+
+    if (simb == '+') {
+        sum = n1 + n2;
+        cout << "El resultado de la suma es: " << sum << endl;
+
+    } else if (simb == '-'){
+        rest = n1 - n2;
+        cout << "El resultado de la resta es: " << rest << endl;
+
+    } else if (simb == '*'){
+        mult = n1 * n2;
+
+        cout << "El resultado de la multiplicacion es: " << mult << endl;
+
+    } else if (simb == '/'){
+        div = n1 / n2;
+
+        cout << "El resultado de la division es: " << div << endl;
+    }
 
     return 0;
 
