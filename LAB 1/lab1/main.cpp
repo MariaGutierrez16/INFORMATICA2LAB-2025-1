@@ -16,10 +16,14 @@ void ejercicio21();
 void ejercicio23();
 int ejercicio25();
 int ejercicio27();
+void problema1();
+void problema3();
+void problema5();
+void problema7();
 
 int main()
 {
-    ejercicio27();
+    problema7();
     return 0;
 }
 
@@ -31,7 +35,7 @@ void ejercicio1()
  cin >> a;
  cout << "ingresa el segundo numero: ";
  cin >> b;
- cout << "el residuo de la divion es: " << a << "/" << b << "es " << a % b << endl;
+ cout << "el residuo de la division es: " << a << "/" << b << "es " << a % b << endl;
 
 
 }
@@ -72,7 +76,7 @@ int ejercicio7(){
     for (i = 1; i <= n; i++){
         sum = sum + i;
     }
-    cout <<  "la suma es: " << sum << endl;
+    cout <<  "la sumatoria desde 0 hasta" << n << " es: " << sum << endl;
     return 0;
 }
 
@@ -114,7 +118,7 @@ int ejercicio13(){
 
         if (n % i == 0)
 
-        cout << i << endl;
+        cout << " Los divisores de " << n << " son " << i << endl;
     }
     return 0;
 
@@ -130,7 +134,7 @@ int ejercicio15(){
         sum += n;
     } while (n!= 0);
 
-    cout << "la suma es: " << sum << endl;
+    cout << "El resultado de la  sumatoria es: " << sum << endl;
 
     return 0;
 
@@ -152,7 +156,7 @@ int ejercicio17(){
         }
     }
 
-    cout << " el numero mayor es: " << mayor << endl;
+    cout << " el numero mayor fue: " << mayor << endl;
 
     return 0;
 }
@@ -273,4 +277,108 @@ int ejercicio27(){
 
     return 0;
 
+}
+
+void problema1(){
+    char caracter;
+        cout << "Ingrese un caracter" << endl;
+    cin >> caracter;
+
+    if ((caracter >= 'A' && caracter <= 'Z') || (caracter >= 'a' && caracter <= 'z')) {
+        // Convertimos a mayúscula si es minúscula
+        if (caracter >= 'a') {
+            caracter -= 32;
+        }
+
+        // Verificamos si es vocal
+        if (caracter == 'A' || caracter == 'E' || caracter == 'I' ||
+            caracter == 'O' || caracter == 'U') {
+            cout << caracter << " es una vocal" << endl;
+        } else {
+            cout << caracter << " es una consonante" << endl;
+        }
+    } else {
+        cout << caracter << " No es una letra" << endl;
+    }
+}
+
+void problema3(){
+    int dia,mes;
+
+    cout << "Ingrese dia:" << endl;
+    cin>>dia;
+    cout << "ingrese mes:" << endl;
+    cin>>mes;
+
+    if (mes < 1 || mes >12){
+        cout << "El mes" << mes << " Es invalido"<< endl;
+    }
+    else{
+        int dias[]={ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        if (dia < 1||dias[mes-1]){
+            if (mes ==2 && dia==29){
+                cout << dia << "/" << mes<< "posible bisiesto" << endl;
+            }else{
+
+                cout << dia << "/" << mes << " es una fecha valida." <<endl;
+
+            }
+        } else {
+            cout << dia << "/" << mes << " es una fecha invalida." << endl;
+
+        }
+
+    }
+}
+
+void problema5(){
+    int n;
+    cout << "Ingrese un número entero impar: ";
+    cin >> n;
+
+    if (n % 2 == 0) {
+        cout << "Ingrese un número impar." << endl;
+
+    }
+
+    // Imprimir el patrón ascendente con espacio a la izquierda
+    for (int i = 1; i <= n; i += 2) {
+        for (int j = 1; j <= (n - i) / 2; j++) {
+            cout << " "; // Espacios a la izquierda
+        }
+        for (int j = 1; j <= i; j++) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+
+    // Imprimir el patrón descendente con espacio a la izquierda
+    for (int i = n - 2; i > 0; i -= 2) {
+        for (int j = 1; j <= (n - i) / 2; j++) {
+            cout << " "; // Espacios a la izquierda
+        }
+        for (int j = 1; j <= i; j++) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+void problema7(){
+    int n;
+    cout << "Ingrese un numero n: " << endl;
+    cin >> n;
+
+    int a = 1, b = 1, sum = 0;
+
+    while (b < n) {
+        if (b % 2 == 0) {
+            sum += b;
+        }
+        int next = a + b;
+        a = b;
+        b = next;
+    }
+
+    cout << "El resultado de la suma es: " << sum << endl;
 }
