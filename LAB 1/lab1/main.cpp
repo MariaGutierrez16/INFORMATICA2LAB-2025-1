@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -20,10 +21,13 @@ void problema1();
 void problema3();
 void problema5();
 void problema7();
+void problema9();
+void problema11();
+void problema13();
 
 int main()
 {
-    problema7();
+    problema13();
     return 0;
 }
 
@@ -382,3 +386,64 @@ void problema7(){
 
     cout << "El resultado de la suma es: " << sum << endl;
 }
+
+void problema9(){
+    int n, sum = 0;
+    cout << "Ingrese un numero entero N: " << endl;
+    cin >> n;
+
+    int b = n;
+    while (b > 0) {
+        int digit = b % 10;
+        sum += pow(digit, digit);
+        b /= 10;
+    }
+
+    cout << "El resultado de la suma es: " << sum << endl;
+}
+
+void problema11(){
+    int num, mcm, a, b, c, i;
+    cout << "Ingrese un numero: ";
+    cin >> num;
+
+    if (num < 1) {
+        cout << "El numero debe ser mayor o igual a 1." << endl;
+
+    }
+
+    mcm = 1;
+    for (i = 1; i <= num; i++) {
+        a = mcm;
+        b = i;
+        while (b != 0) {
+            c = b;
+            b = a % b;
+            a = c;
+        }
+        mcm = (mcm * i) / a;
+    }
+
+    cout << "El MCM de los numeros del 1 al " << num << " es: " << mcm << endl;
+
+}
+
+void problema13(){
+
+    int n;
+    int prim = 0;
+
+    cout << "Ingresa un numero: ";
+    cin >> n;
+
+    for (int i = 2; i <=n ; i++) {
+        if (n % i == 0) {
+            prim += i;
+
+        }
+    }
+
+    cout << " la suma es " << prim << endl;
+
+}
+
