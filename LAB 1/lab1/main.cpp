@@ -4,8 +4,8 @@
 using namespace std;
 
 void ejercicio1();
-int ejercicio3();
-int ejercicio5();
+void ejercicio3();
+void ejercicio5();
 int ejercicio7();
 int ejercicio9();
 int ejercicio11();
@@ -28,42 +28,56 @@ void problema13();
 
 int main()
 {
-    ejercicio29();
+    ejercicio5();
     return 0;
 }
 
 void ejercicio1()
 {
- int a, b;
- cout << "Ingresa dos numeros: ";
- cin >> a >> b;
+    int a, b,residuo;
+    cout << "Ingresa dos numeros: ";
+    cin >> a >> b;
 
- cout << "el residuo de la division es: " << a << "/" << b << " es " << a % b << endl;
+    while (b == 0) {
+        cout << "No debes ingresar el numero 0, intenta de nuevo: ";
+        cin >> b;
+    }
 
+    residuo = a % b;
 
+    cout << "El residuo de la division de " << a << " / " << b << " es " << residuo << endl;
 }
 
-int ejercicio3(){
+void ejercicio3(){
     int a, b;
 
     cout << "Ingresa dos numeros: ";
     cin >> a >> b;
+
+    while (a == b){
+        cout << "Los numeros ingresados son iguales, intenta de nuevo: ";
+        cin >> a >> b;
+    }
     if (a > b)
         cout << "El mayor es: " << a << endl;
     else
         cout << "El mayor es: " << b << endl;
 
-    return 0;
+
 }
 
-int ejercicio5(){
+void ejercicio5(){
     int a, b;
     double dividir;
     cout << "Ingresa dos numeros: ";
     cin >> a >> b ;
+    while (b == 0) {
+        cout << "El segundo numero no puede ser 0, intenta de nuevo: ";
+        cin >> b;
+    }
     dividir = a / b;
-    cout << "El resultado de la divison es: " << dividir;
-    return 0;
+    cout << "El resultado de la divison es: " << dividir << endl;
+
 }
 
 int ejercicio7(){
