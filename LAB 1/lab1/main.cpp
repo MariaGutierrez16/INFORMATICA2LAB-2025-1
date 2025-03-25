@@ -6,9 +6,9 @@ using namespace std;
 void ejercicio1();
 void ejercicio3();
 void ejercicio5();
-int ejercicio7();
-int ejercicio9();
-int ejercicio11();
+void ejercicio7();
+void ejercicio9();
+void ejercicio11();
 int ejercicio13();
 int ejercicio15();
 int ejercicio17();
@@ -28,7 +28,7 @@ void problema13();
 
 int main()
 {
-    ejercicio5();
+    ejercicio11();
     return 0;
 }
 
@@ -39,7 +39,7 @@ void ejercicio1()
     cin >> a >> b;
 
     while (b == 0) {
-        cout << "No debes ingresar el numero 0, intenta de nuevo: ";
+        cout << "El segundo numero no puede ser 0, intenta de nuevo: ";
         cin >> b;
     }
 
@@ -80,7 +80,7 @@ void ejercicio5(){
 
 }
 
-int ejercicio7(){
+void ejercicio7(){
     int n, sum, i;
 
     sum = 0;
@@ -91,36 +91,47 @@ int ejercicio7(){
     for (i = 1; i <= n; i++){
         sum = sum + i;
     }
-    cout <<  "la sumatoria desde 0 hasta" << n << " es: " << sum << endl;
-    return 0;
+    cout <<  "la sumatoria desde 0 hasta " << n << " es: " << sum << endl;
+
 }
 
-int ejercicio9(){
+void ejercicio9(){
     int n;
     double perimetro,area;
 
     cout << "Ingrese un numero: ";
     cin >> n;
 
+    while ( n <= 0){
+        cout << "Ingresa un numero diferente a 0: ";
+        cin >> n;
+    }
+
     perimetro = 2 * 3.1416 * n;
     area = 3.1416 * n * n;
 
     cout << "El perimetro: " << perimetro << endl;
     cout << "el area es : " << area << endl;
-    return 0;
+
 }
 
-int ejercicio11(){
-    int n;
+void ejercicio11(){
+    int n ;
+    int mult = 0;
     cout << "Ingrese un numero: ";
     cin >> n;
 
-
+    while (n <=0){
+        cout << "El numero no puede ser negativo o 0, ingresa de nuevo el numero: ";
+        cin >> n;
+    }
     for (int i=1;i<=10;i++){
-        cout << n << "*" << i << " = " << n * i << endl;
+
+        mult= n * i;
+        cout << n << "*" << i << " = " << mult << endl;
     }
 
-    return 0;
+
 }
 
 int ejercicio13(){
