@@ -17,6 +17,7 @@ void ejercicio21();
 void ejercicio23();
 int ejercicio25();
 int ejercicio27();
+void ejercicio29();
 void problema1();
 void problema3();
 void problema5();
@@ -27,7 +28,7 @@ void problema13();
 
 int main()
 {
-    problema13();
+    ejercicio29();
     return 0;
 }
 
@@ -35,11 +36,9 @@ void ejercicio1()
 {
  int a, b;
  cout << "Ingresa dos numeros: ";
- cout << "Ingresa el primer numero: ";
- cin >> a;
- cout << "ingresa el segundo numero: ";
- cin >> b;
- cout << "el residuo de la division es: " << a << "/" << b << "es " << a % b << endl;
+ cin >> a >> b;
+
+ cout << "el residuo de la division es: " << a << "/" << b << " es " << a % b << endl;
 
 
 }
@@ -60,10 +59,8 @@ int ejercicio3(){
 int ejercicio5(){
     int a, b;
     double dividir;
-    cout << "Ingresa el primer numero: ";
-    cin >> a;
-    cout << "ingresa el segundo numero: ";
-    cin >> b;
+    cout << "Ingresa dos numeros: ";
+    cin >> a >> b ;
     dividir = a / b;
     cout << "El resultado de la divison es: " << dividir;
     return 0;
@@ -283,6 +280,30 @@ int ejercicio27(){
 
 }
 
+void ejercicio29(){
+    int min = 0, max = 100, mid;
+    char res;
+
+    cout << "Piensa en un numero entre 0 y 100 y yo lo adivinare." << endl;
+
+    while (min <= max) {
+        mid = (min + max) / 2;
+        cout << "Es " << mid << " tu numero? (Ingrese '>' si es mayor, '<' si es menor, '=' si es correcto): ";
+        cin >> res;
+
+        if (res == '=') {
+            cout << "He adivinado tu numero!" << endl;
+            break;
+        } else if (res == '<') {
+            max = mid - 1;
+        } else if (res == '>') {
+            min = mid + 1;
+        } else {
+            cout << "Entrada no valida. Usa solo '>', '<' o '='." << endl;
+        }
+    }
+}
+
 void problema1(){
     char caracter;
         cout << "Ingrese un caracter" << endl;
@@ -337,15 +358,15 @@ void problema3(){
 
 void problema5(){
     int n;
-    cout << "Ingrese un número entero impar: ";
+    cout << "Ingrese un numero entero impar: ";
     cin >> n;
 
     if (n % 2 == 0) {
-        cout << "Ingrese un número impar." << endl;
+        cout << "Ingrese un numero impar." << endl;
 
     }
 
-    // Imprimir el patrón ascendente con espacio a la izquierda
+    // Imprimir el patron ascendente con espacio a la izquierda
     for (int i = 1; i <= n; i += 2) {
         for (int j = 1; j <= (n - i) / 2; j++) {
             cout << " "; // Espacios a la izquierda
@@ -356,7 +377,7 @@ void problema5(){
         cout << endl;
     }
 
-    // Imprimir el patrón descendente con espacio a la izquierda
+    // Imprimir el patron descendente con espacio a la izquierda
     for (int i = n - 2; i > 0; i -= 2) {
         for (int j = 1; j <= (n - i) / 2; j++) {
             cout << " "; // Espacios a la izquierda
@@ -369,7 +390,7 @@ void problema5(){
 }
 
 void problema7(){
-    int n;
+    int n,c;
     cout << "Ingrese un numero n: " << endl;
     cin >> n;
 
@@ -379,12 +400,14 @@ void problema7(){
         if (b % 2 == 0) {
             sum += b;
         }
-        int next = a + b;
+        c = a + b;
         a = b;
-        b = next;
+        b = c;
     }
 
     cout << "El resultado de la suma es: " << sum << endl;
+
+
 }
 
 void problema9(){
