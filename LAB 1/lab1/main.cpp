@@ -9,14 +9,14 @@ void ejercicio5();
 void ejercicio7();
 void ejercicio9();
 void ejercicio11();
-int ejercicio13();
-int ejercicio15();
-int ejercicio17();
-int ejercicio19();
+void ejercicio13();
+void ejercicio15();
+void ejercicio17();
+void ejercicio19();
 void ejercicio21();
 void ejercicio23();
-int ejercicio25();
-int ejercicio27();
+void ejercicio25();
+void ejercicio27();
 void ejercicio29();
 void problema1();
 void problema3();
@@ -28,7 +28,7 @@ void problema13();
 
 int main()
 {
-    ejercicio11();
+    ejercicio19();
     return 0;
 }
 
@@ -134,23 +134,27 @@ void ejercicio11(){
 
 }
 
-int ejercicio13(){
+void ejercicio13(){
 
     int n;
     cout << "Ingresa un numer: ";
     cin >> n;
 
-    for (int i=1;i<=n;i++){
-
-        if (n % i == 0)
-
-        cout << " Los divisores de " << n << " son " << i << endl;
+    while (n<=0){
+        cout << " El numero no puede ser negativo o 0, intenta de nuevo: ";
+        cin >> n;
     }
-    return 0;
+
+    cout << "Los divisores de " << n << " son:" << endl;
+    for (int i = 1; i <= n; i++) {
+        if (n % i == 0)
+            cout << " " << i << endl;
+    }
+
 
 }
 
-int ejercicio15(){
+void ejercicio15(){
 
     int n , sum = 0;
 
@@ -162,11 +166,11 @@ int ejercicio15(){
 
     cout << "El resultado de la  sumatoria es: " << sum << endl;
 
-    return 0;
+
 
 }
 
-int ejercicio17(){
+void ejercicio17(){
 
     int n =1;
 
@@ -184,15 +188,16 @@ int ejercicio17(){
 
     cout << " el numero mayor fue: " << mayor << endl;
 
-    return 0;
+
 }
 
-int ejercicio19() {
+void ejercicio19() {
     int n;
     int prim = 0;
 
     cout << "Ingresa un numero: ";
     cin >> n;
+
 
     for (int i = 1; i <= n; i++) {
         if (n % i == 0) {
@@ -206,7 +211,7 @@ int ejercicio19() {
         cout << n << " no es un numero primo" << endl;
     }
 
-    return 0;
+
 }
 
 void ejercicio21(){
@@ -245,7 +250,7 @@ void ejercicio23(){
     cout << "El MCM de " << n1 << " y " << n2 << " es " << mcm << "." << endl;
 }
 
-int ejercicio25(){
+void ejercicio25(){
     int n,a;
 
     int c = 1;
@@ -265,11 +270,11 @@ int ejercicio25(){
 
     cout << " el numero " << a << " tiene " << c << " digitos " << endl;
 
-    return 0;
+
 
 }
 
-int ejercicio27(){
+void ejercicio27(){
 
     int n1,n2;
     int sum , rest, mult ,div = 0;
@@ -301,7 +306,7 @@ int ejercicio27(){
         cout << "El resultado de la division es: " << div << endl;
     }
 
-    return 0;
+
 
 }
 
