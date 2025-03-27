@@ -33,7 +33,7 @@ void problema17();
 int main()
 {
 
-    problema1();
+    problema5();
     return 0;
 }
 
@@ -393,7 +393,7 @@ void problema5(){
 
     // Verificar si el número ingresado es par
     while (n % 2 == 0) {
-        cout << "Ingrese un numero impar." << endl;
+        cout <<"Valor incorrecto, intenta de nuevo: " << endl;
         cin >> n;
         break;
     }
