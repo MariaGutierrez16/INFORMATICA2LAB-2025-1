@@ -283,40 +283,41 @@ void ejercicio25(){
 
 }
 
-void ejercicio27(){
-
-    int n1,n2;
-    int sum , rest, mult ,div = 0;
-
+void ejercicio27() {
+    double n1, n2;
+    double sum, rest, mult, div;
     char simb;
 
-    cout << " Ingrese dos numeros: ";
+    cout << "Ingrese dos numeros: ";
     cin >> n1 >> n2;
 
-    cout << " Ingrese el simbolo de la operacion que desea realizar: ";
+    cout << "Ingrese el simbolo de la operacion que desea realizar: ";
     cin >> simb;
+
+
+    while (simb != '+' && simb != '-' && simb != '*' && simb != '/') {
+        cout << "Error: Operacion no reconocida. Use +, -, * o /." << endl;
+        cin >> simb;
+    }
 
     if (simb == '+') {
         sum = n1 + n2;
         cout << "El resultado de la suma es: " << sum << endl;
-
-    } else if (simb == '-'){
+    } else if (simb == '-') {
         rest = n1 - n2;
         cout << "El resultado de la resta es: " << rest << endl;
-
-    } else if (simb == '*'){
+    } else if (simb == '*') {
         mult = n1 * n2;
-
         cout << "El resultado de la multiplicacion es: " << mult << endl;
+    } else if (simb == '/') {
 
-    } else if (simb == '/'){
+        while (n2 == 0) {
+            cout << "Error: Division por cero no permitida. Ingresa de nuevo el divisor: ";
+            cin >> n2;
+        }
         div = n1 / n2;
-
         cout << "El resultado de la division es: " << div << endl;
     }
-
-
-
 }
 
 void ejercicio29(){
