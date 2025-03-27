@@ -395,7 +395,6 @@ void problema5(){
     while (n % 2 == 0) {
         cout <<"Valor incorrecto, intenta de nuevo: " << endl;
         cin >> n;
-        break;
     }
 
     // Imprimir el patrón ascendente con espacios a la izquierda
