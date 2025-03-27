@@ -392,8 +392,10 @@ void problema5(){
     cin >> n;
 
     // Verificar si el número ingresado es par
-    if (n % 2 == 0) {
+    while (n % 2 == 0) {
         cout << "Ingrese un numero impar." << endl;
+        cin >> n;
+        break;
     }
 
     // Imprimir el patrón ascendente con espacios a la izquierda
