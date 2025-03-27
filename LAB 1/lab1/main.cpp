@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/*
 void ejercicio1();
 void ejercicio3();
 void ejercicio5();
@@ -25,10 +26,18 @@ void problema7();
 void problema9();
 void problema11();
 void problema13();
+*/
+
+void problema15();
+void problema17();
+
 
 int main()
 {
+    /*
     ejercicio19();
+    */
+    problema17();
     return 0;
 }
 
@@ -460,9 +469,10 @@ void problema11(){
     cout << "Ingrese un numero: ";
     cin >> num;
 
-    if (num < 1) {
+    while(num < 1){
         cout << "El numero debe ser mayor o igual a 1." << endl;
-
+        cout << "Ingrese nuevamente el numero: ";
+        cin >> num;
     }
 
     mcm = 1;
@@ -477,14 +487,14 @@ void problema11(){
         mcm = (mcm * i) / a;
     }
 
-    cout << "El MCM de los numeros del 1 al " << num << " es: " << mcm << endl;
+    cout << " El minimo comun multiplo es: " << mcm << endl;
 
 }
 
 void problema13(){
 
     int n;
-    int prim = 0;
+    int prim = 0;  //Contador de #´s primos
 
     cout << "Ingresa un numero: ";
     cin >> n;
@@ -497,6 +507,78 @@ void problema13(){
     }
 
     cout << " la suma es " << prim << endl;
+
+}
+
+void problema15(){
+    int num_user;
+    cout << "Ingrese un numero impar y mayor que 0: ";
+    cin >> num_user;
+
+
+    while(num_user % 2 == 0 ||  num_user < 1) {
+        cout << "El numero debe ser impar y mayor a 0." << endl;
+        cout << "Ingresa de nuevo el numero: ";
+        cin >> num_user;
+    }
+
+    /*suma_num es = 1 ya que en 1 comienza la espiral, y almacena la suma de la espiral
+      num es en el numero en donde va la espiral
+    */
+    int suma_num = 1,num = 1, incremento = 2;
+
+    for (int i = 1; i <= num_user / 2; ++i) {   //i <= num_user dicta el numero de capas de la espiral
+        for (int j = 0; j < 4; ++j) { // Comienza a realizar la suma de los numeros hasta recorrer las 4 esquinas del espiral
+            num += incremento;
+            suma_num += num;
+        }
+        incremento += 2; // Aumenta  +2 para la siguiente capa
+    }
+
+    cout << "En una espiral de " << num_user << "x" << num_user << ", la suma es: " << suma_num << "." << endl;
+
+}
+
+void problema17(){
+
+    int num_inicial = 1; //Dicta desde donde comienza el programa a evaluar para encontrar los divisores
+    int num_user;
+
+    cout<<"Ingrese un numero: ";
+    cin >> num_user;
+
+    while(true){
+        int num_triangular = num_inicial *(num_inicial + 1)/2;
+        int contador_divisores = 0;
+        int raiz_num = sqrt(num_triangular); //La raiz cuadrada del numero triangular dicta cual es el # maximo por el cual dividirlo
+
+        for(int i = 1; i <= raiz_num; i++){
+
+            if(num_triangular % i == 0 && i*i != num_triangular){
+                contador_divisores += 2; //El contador avanza +2 ya que si la division exacta entonces tanto el cociente como el divisor son divisores
+            }
+        }
+
+        if(contador_divisores > num_user){
+            cout<<"El primer numero triangular con mas de " << num_user << " divisores es: " << num_triangular << endl;
+            break;
+        }
+        num_inicial +=1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
