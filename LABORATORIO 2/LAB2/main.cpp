@@ -8,10 +8,14 @@ void fun_a(int *px, int *py);
 void fun_b(int a[], int tam);
 void problema1();
 void problema2();
+void problema3();
+void problema4();
+void problema5();
+void problema6();
 
 int main()
 {
-    problema2();
+    problema6();
 
     return 0;
 }
@@ -110,7 +114,7 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
     void problema2() {
         srand(time(0));
 
-        const int tamaño = 10;
+        const int tamaño = 200;
         char letras[tamaño];
         int conteo[26] = {0};
 
@@ -138,4 +142,94 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
                 cout << char('A' + i) << ": " << conteo[i] << endl;
             }
         }
+    }
+    void problema3() {
+        char a[100], b[100];
+        int i = 0;
+
+        cout << "Ingrese la primera cadena: ";
+        cin >> a;
+
+        cout << "Ingrese la segunda cadena: ";
+        cin >> b;
+
+        while (a[i] != '\0' && b[i] != '\0') {
+            if (a[i] != b[i]) {
+                cout << "Las cadenas son diferentes." << endl;
+                return;
+            }
+            i++;
+        }
+
+        if (a[i] == '\0' && b[i] == '\0') {
+            cout << "Las cadenas son iguales." << endl;
+        } else {
+            cout << "Las cadenas son diferentes." << endl;
+        }
+    }
+
+    void problema4() {
+        char texto[100];
+        int numero = 0, i = 0;
+
+        cout << "Ingrese un numero en forma de cadena: ";
+        cin >> texto;
+
+        while (texto[i] != '\0') {
+            numero = numero * 10 + (texto[i] - '0');
+            i++;
+        }
+
+        cout << "El numero entero es: " << numero << endl;
+    }
+    void problema5() {
+        int numero;
+        char cadena[20];
+        char temp[20];
+        int i = 0, j = 0;
+
+        cout << "Ingrese un numero entero: ";
+        cin >> numero;
+
+        if (numero == 0) {
+            cadena[0] = '0';
+            cadena[1] = '\0';
+        } else {
+            while (numero > 0) {
+                temp[i] = (numero % 10) + '0';
+                numero = numero / 10;
+                i++;
+            }
+
+            while (i > 0) {
+                i--;
+                cadena[j] = temp[i];
+                j++;
+            }
+
+            cadena[j] = '\0';
+        }
+
+        cout << "La cadena es: " << cadena << endl;
+    }
+    void problema6() {
+        char texto[100];
+        char mayuscula[100];
+        int i = 0;
+
+        cout << "Ingrese una cadena: ";
+        cin >> texto;
+
+        while (texto[i] != '\0') {
+            if (texto[i] >= 'a' && texto[i] <= 'z') {
+                mayuscula[i] = texto[i] - ('a' - 'A');  // Convertir a mayúscula
+            } else {
+                mayuscula[i] = texto[i];  // Dejar igual si no es minúscula
+            }
+            i++;
+        }
+
+        mayuscula[i] = '\0';  // Fin de cadena
+
+        cout << "Original: " << texto << ". En mayuscula: " << mayuscula << "." << endl;
     }
