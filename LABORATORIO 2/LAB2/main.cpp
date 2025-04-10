@@ -35,6 +35,10 @@ int main()
 
 
 //ejercicio1
+
+//int array[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+//fun_b(array, 10);
+
 void fun_a(int *px,int*py){ int tmp = *px;
     *px = *py;
     *py = tmp;
@@ -48,15 +52,26 @@ void fun_b(int a[], int tam){
 
 //ejercicio2
 
-//int array[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-//fun_b(array, 10);
+
 
 void fun_c(double *a, int n, double *promedio, double *suma) {
     int i;
     *suma = 0.0;
     for (i = 0; i < n; i++)
-        *suma += *(a + i);
+        *suma += a[i];
     *promedio = *suma / n;
+
+    cout << endl << endl;
+    cout << "Suma: " << *suma << endl;
+    cout << "Promedio: " << *promedio << endl;
+
+    //main
+    //double datos[] = {5, 4, 7, 2, 3, 9};
+    //int cantidad = 6;
+    //double suma, promedio;
+
+    //fun_c(datos, cantidad, &promedio, &suma);
+
 }
 
 //ejercicio 3
@@ -215,211 +230,262 @@ void loop()
             }
         }
     }
+
+
+    // Función que compara dos cadenas de caracteres para determinar si son iguales o diferentes
     void problema3() {
-        char a[100], b[100];
-        int i = 0;
+        char a[100], b[100];  // Arreglos para almacenar las dos cadenas (máximo 99 caracteres cada una)
+        int i = 0;            // Índice para recorrer las cadenas
 
         cout << "Ingrese la primera cadena: ";
-        cin >> a;
+        cin >> a;             // Se lee la primera cadena (sin espacios)
 
         cout << "Ingrese la segunda cadena: ";
-        cin >> b;
+        cin >> b;             // Se lee la segunda cadena (sin espacios)
 
+        // Se recorre ambas cadenas carácter por carácter mientras no se llegue al final de alguna
         while (a[i] != '\0' && b[i] != '\0') {
+            // Si se encuentra un carácter diferente, se concluye que las cadenas son distintas
             if (a[i] != b[i]) {
                 cout << "Las cadenas son diferentes." << endl;
-                return;
+                return;  // Sale de la función al encontrar la diferencia
             }
-            i++;
+            i++;  // Pasa al siguiente carácter
         }
 
+        // Si ambas cadenas terminaron al mismo tiempo, son iguales
         if (a[i] == '\0' && b[i] == '\0') {
             cout << "Las cadenas son iguales." << endl;
         } else {
+            // Si una cadena es más larga que la otra, son diferentes
             cout << "Las cadenas son diferentes." << endl;
         }
     }
 
+    // Función que convierte una cadena de caracteres numéricos a un número entero
     void problema4() {
-        char texto[100];
-        int numero = 0, i = 0;
+        char texto[100];          // Arreglo para almacenar la cadena ingresada (máximo 99 caracteres + terminador nulo)
+        int numero = 0, i = 0;    // Variables: 'numero' para acumular el resultado y 'i' como índice para recorrer el texto
 
         cout << "Ingrese un numero en forma de cadena: ";
-        cin >> texto;
+        cin >> texto;             // Se lee la cadena ingresada por el usuario
 
+        // Bucle que recorre cada carácter de la cadena hasta encontrar el terminador nulo '\0'
         while (texto[i] != '\0') {
+            // Convierte el carácter actual a número y lo acumula en 'numero'
             numero = numero * 10 + (texto[i] - '0');
-            i++;
+            i++; // Avanza al siguiente carácter
         }
 
+        // Muestra el número entero resultante
         cout << "El numero entero es: " << numero << endl;
     }
+
+
+    // Función que convierte un número entero a una cadena de caracteres
     void problema5() {
         int numero;
-        char cadena[20];
-        char temp[20];
-        int i = 0, j = 0;
+        char cadena[20];  // Arreglo donde se almacenará la cadena resultante
+        char temp[20];    // Arreglo temporal para almacenar los dígitos en orden inverso
+        int i = 0, j = 0;  // Variables auxiliares para los índices
 
         cout << "Ingrese un numero entero: ";
-        cin >> numero;
+        cin >> numero;  // Se lee el número entero ingresado por el usuario
 
+        // Caso especial: si el número es 0, se asigna manualmente
         if (numero == 0) {
             cadena[0] = '0';
-            cadena[1] = '\0';
+            cadena[1] = '\0';  // Se agrega el terminador nulo
         } else {
+            // Se extraen los dígitos del número desde el final
             while (numero > 0) {
-                temp[i] = (numero % 10) + '0';
-                numero = numero / 10;
+                temp[i] = (numero % 10) + '0';  // Convierte el dígito a carácter y lo guarda en 'temp'
+                numero = numero / 10;           // Elimina el último dígito del número
                 i++;
             }
 
+            // Se invierte el orden de los caracteres para obtener la cadena correcta
             while (i > 0) {
                 i--;
-                cadena[j] = temp[i];
+                cadena[j] = temp[i];  // Copia de 'temp' a 'cadena' en orden correcto
                 j++;
             }
 
-            cadena[j] = '\0';
+            cadena[j] = '\0';  // Se agrega el terminador nulo al final de la cadena
         }
 
+        // Se muestra la cadena resultante
         cout << "La cadena es: " << cadena << endl;
     }
+
+
+    // Función que convierte una cadena ingresada a mayúsculas carácter por carácter
     void problema6() {
-        char texto[100];
-        char mayuscula[100];
-        int i = 0;
+        char texto[100];       // Arreglo para almacenar la cadena original ingresada por el usuario
+        char mayuscula[100];   // Arreglo para almacenar la versión en mayúsculas
+        int i = 0;             // Índice para recorrer los arreglos
 
         cout << "Ingrese una cadena: ";
-        cin >> texto;
+        cin >> texto;          // Se lee la cadena (sin espacios) desde el teclado
 
+        // Recorre cada carácter de la cadena hasta llegar al final ('\0')
         while (texto[i] != '\0') {
+            // Si el carácter es una letra minúscula (entre 'a' y 'z')
             if (texto[i] >= 'a' && texto[i] <= 'z') {
-                mayuscula[i] = texto[i] - ('a' - 'A');  // Convertir a mayúscula
+                // Se convierte a mayúscula restando la diferencia entre 'a' y 'A'
+                mayuscula[i] = texto[i] - ('a' - 'A');
             } else {
-                mayuscula[i] = texto[i];  // Dejar igual si no es minúscula
+                // Si no es una minúscula, se copia tal cual
+                mayuscula[i] = texto[i];
             }
-            i++;
+            i++;  // Avanza al siguiente carácter
         }
 
-        mayuscula[i] = '\0';  // Fin de cadena
+        mayuscula[i] = '\0';  // Se agrega el terminador nulo para finalizar la nueva cadena
 
+        // Se muestra la cadena original y la convertida en mayúsculas
         cout << "Original: " << texto << ". En mayuscula: " << mayuscula << "." << endl;
     }
+
+
+    // Función que elimina los caracteres repetidos de una cadena
     void problema7() {
-        char original[100];
-        char sinRepetidos[100];
-        int i = 0, j = 0, k;
-        bool repetido;
+        char original[100];        // Arreglo para la cadena original ingresada
+        char sinRepetidos[100];    // Arreglo para almacenar la cadena sin caracteres repetidos
+        int i = 0, j = 0, k;       // 'i' recorre original, 'j' controla el índice de sinRepetidos, 'k' para buscar repeticiones
+        bool repetido;             // Bandera para saber si un carácter ya fue agregado
 
         cout << "Ingrese una cadena: ";
-        cin >> original;
+        cin >> original;           // Se lee la cadena (sin espacios)
 
+        // Recorre cada carácter de la cadena original
         while (original[i] != '\0') {
-            repetido = false;
+            repetido = false;  // Se asume que el carácter no está repetido
 
-            // Revisar si el carácter ya está en sinRepetidos
+            // Compara con los caracteres ya guardados en sinRepetidos
             for (k = 0; k < j; k++) {
                 if (original[i] == sinRepetidos[k]) {
-                    repetido = true;
-                    break;
+                    repetido = true;  // Si ya está, se marca como repetido
+                    break;            // Se sale del ciclo interno
                 }
             }
 
+            // Si no está repetido, se agrega a sinRepetidos
             if (!repetido) {
                 sinRepetidos[j] = original[i];
                 j++;
             }
 
-            i++;
+            i++;  // Avanza al siguiente carácter
         }
 
-        sinRepetidos[j] = '\0';  // Fin de cadena
+        sinRepetidos[j] = '\0';  // Se finaliza la nueva cadena con el terminador nulo
 
+        // Muestra el resultado
         cout << "Original: " << original << ". Sin repetidos: " << sinRepetidos << "." << endl;
     }
+
+
+    // Función que separa los dígitos numéricos y las letras/otros caracteres de una cadena
     void problema8() {
-        char original[100], texto[100], numero[100];
-        int i = 0, j = 0, k = 0;
+        char original[100], texto[100], numero[100];  // original: entrada, texto: letras y otros, numero: solo dígitos
+        int i = 0, j = 0, k = 0;  // i: recorre original, j: índice para número, k: índice para texto
 
         cout << "Ingrese una cadena: ";
-        cin >> original;
+        cin >> original;  // Se lee la cadena (sin espacios)
 
+        // Se recorre la cadena original
         while (original[i] != '\0') {
+            // Si el carácter es un dígito (entre '0' y '9')
             if (original[i] >= '0' && original[i] <= '9') {
-                numero[j] = original[i];
+                numero[j] = original[i];  // Se guarda en el arreglo de números
                 j++;
             } else {
-                texto[k] = original[i];
+                texto[k] = original[i];   // Si no es número, se guarda en el arreglo de texto
                 k++;
             }
-            i++;
+            i++;  // Avanza al siguiente carácter
         }
 
+        // Se agregan los terminadores nulos a ambas cadenas resultantes
         numero[j] = '\0';
         texto[k] = '\0';
 
+        // Se imprime el resultado
         cout << "Original: " << original << "." << endl;
         cout << "Texto: " << texto << ". Numero: " << numero << "." << endl;
     }
 
+
+    // Función que agrupa una cadena numérica en bloques de n cifras, los convierte a enteros y los suma
     void problema9() {
         int n, indice = 0, suma = 0, longitud = 0;
-        char cadena[100], copia[100];
+        char cadena[100], copia[100];  // cadena: entrada original, copia: respaldo de la cadena modificada
 
         cout << "Ingrese la cantidad de cifras por grupo: ";
         cin >> n;
 
         cout << "Ingrese la cadena numerica: ";
-        cin >> cadena;
+        cin >> cadena;  // Se lee la cadena numérica como texto (sin espacios)
 
-        // Calcular longitud
+        // Calcular la longitud de la cadena
         while (cadena[longitud] != '\0') {
             longitud++;
         }
 
-        int sobrante = longitud % n;
+        int sobrante = longitud % n;  // Verifica si hay cifras que no completan un grupo
 
-        // Agregar ceros si es necesario
+        // Si hay sobrante, se agregan ceros al principio para completar el último grupo
         if (sobrante != 0) {
-            int ceros = n - sobrante;
+            int ceros = n - sobrante;  // Cuántos ceros se necesitan
+
+            // Mover todos los caracteres hacia la derecha para hacer espacio
             for (int i = longitud - 1; i >= 0; i--) {
                 cadena[i + ceros] = cadena[i];
             }
+
+            // Insertar ceros al inicio
             for (int i = 0; i < ceros; i++) {
                 cadena[i] = '0';
             }
+
+            // Finalizar la cadena con el terminador nulo
             cadena[longitud + ceros] = '\0';
-            longitud += ceros;
+            longitud += ceros;  // Actualizar la nueva longitud
         }
 
-        // Copiar la cadena modificada a copia
+        // Copiar la cadena ajustada a una variable auxiliar para mostrarla sin modificarla luego
         for (int i = 0; i < longitud; i++) {
             copia[i] = cadena[i];
         }
         copia[longitud] = '\0';
 
-        // Sumar bloques de n cifras
+        // Recorrer la cadena por bloques de n cifras y convertir cada uno a número
         while (indice < longitud) {
             int numero = 0;
             for (int j = 0; j < n; j++) {
-                numero = numero * 10 + (cadena[indice + j] - '0');
+                numero = numero * 10 + (cadena[indice + j] - '0');  // Convertir dígito a entero
             }
-            suma += numero;
-            indice += n;
+            suma += numero;     // Acumular la suma
+            indice += n;        // Avanzar al siguiente grupo
         }
 
+        // Mostrar el resultado
         cout << "Original: " << copia << ". Suma: " << suma << "." << endl;
     }
+
+
+    // Función que convierte un número romano (en mayúsculas) a número entero
     void problema10() {
-        char romano[100];
-        int valores[100];
-        int total = 0;
-        int longitud = 0;
+        char romano[100];       // Arreglo para almacenar el número romano ingresado
+        int valores[100];       // Arreglo que guardará los valores equivalentes de cada letra romana
+        int total = 0;          // Acumulador para el número entero resultante
+        int longitud = 0;       // Longitud de la cadena romana
 
         cout << "Ingrese un numero romano en mayusculas: ";
-        cin >> romano;
+        cin >> romano;          // Se lee el número romano (sin espacios)
 
-        // Convertir letras romanas a valores
+        // Paso 1: Convertir cada letra romana a su valor numérico correspondiente
         while (romano[longitud] != '\0') {
             if (romano[longitud] == 'M') {
                 valores[longitud] = 1000;
@@ -436,36 +502,42 @@ void loop()
             } else if (romano[longitud] == 'I') {
                 valores[longitud] = 1;
             } else {
-                valores[longitud] = 0; // por si hay un caracter no válido
+                valores[longitud] = 0;  // En caso de que haya un carácter no válido
             }
-            longitud++;
+            longitud++;  // Avanza al siguiente carácter
         }
 
-        // Aplicar reglas de suma y resta
+        // Paso 2: Aplicar las reglas de los números romanos
+        // Si un valor menor está antes de uno mayor, se resta. Si no, se suma.
         for (int i = 0; i < longitud; i++) {
             if (i < longitud - 1 && valores[i] < valores[i + 1]) {
-                total -= valores[i];
+                total -= valores[i];  // Se resta si el siguiente valor es mayor
             } else {
-                total += valores[i];
+                total += valores[i];  // Si no, se suma
             }
         }
 
+        // Mostrar resultado
         cout << "El numero ingresado fue: " << romano << " Que corresponde a: " << total << "." << endl;
     }
 
-    void problema11() {
-        const int filas = 15;
-        const int asientos = 20;
-        char sala[filas][asientos];
 
-        // Inicializar todos los asientos como disponibles '-'
+    // Función que simula un sistema de reservas para una sala de cine
+    void problema11() {
+        const int filas = 15;         // Cantidad de filas en la sala (de la A a la O)
+        const int asientos = 20;      // Cantidad de asientos por fila
+        char sala[filas][asientos];   // Matriz que representa la sala
+
+        // Inicializa todos los asientos como disponibles, usando el símbolo '-'
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < asientos; j++) {
                 sala[i][j] = '-';
             }
         }
 
-        char opcion;
+        char opcion;  // Variable para almacenar la opción del usuario
+
+        // Menú principal
         do {
             cout << "\nOpciones:\n";
             cout << "1. Ver sala\n";
@@ -475,8 +547,8 @@ void loop()
             cout << "Seleccione una opcion (1-4): ";
             cin >> opcion;
 
+            // Opción 1: Mostrar el estado actual de la sala
             if (opcion == '1') {
-                // Mostrar sala
                 cout << "\n    ";
                 for (int j = 0; j < asientos; j++) {
                     if (j + 1 < 10) cout << " " << j + 1;
@@ -485,26 +557,30 @@ void loop()
                 }
                 cout << "\n";
                 for (int i = 0; i < filas; i++) {
-                    cout << (char)('A' + i) << " | ";
+                    cout << (char)('A' + i) << " | ";  // Nombre de la fila
                     for (int j = 0; j < asientos; j++) {
                         cout << " " << sala[i][j] << " ";
                     }
                     cout << "\n";
                 }
+
+                // Opción 2 y 3: Reservar o cancelar asiento
             } else if (opcion == '2' || opcion == '3') {
                 char letra;
                 int numero;
                 cout << "Ingrese fila (A-O): ";
                 cin >> letra;
-                letra = toupper(letra);
+                letra = toupper(letra);  // Convertir a mayúscula si fue en minúscula
                 cout << "Ingrese asiento (1-20): ";
                 cin >> numero;
 
-                int fila = letra - 'A';
-                int asiento = numero - 1;
+                int fila = letra - 'A';      // Convertir letra a índice
+                int asiento = numero - 1;    // Convertir a índice de 0 a 19
 
+                // Validar que la fila y el asiento estén dentro del rango permitido
                 if (fila >= 0 && fila < filas && asiento >= 0 && asiento < asientos) {
                     if (opcion == '2') {
+                        // Reservar asiento si está disponible
                         if (sala[fila][asiento] == '-') {
                             sala[fila][asiento] = '+';
                             cout << "Reserva realizada.\n";
@@ -512,6 +588,7 @@ void loop()
                             cout << "El asiento ya esta reservado.\n";
                         }
                     } else {
+                        // Cancelar reserva si el asiento está ocupado
                         if (sala[fila][asiento] == '+') {
                             sala[fila][asiento] = '-';
                             cout << "Reserva cancelada.\n";
@@ -522,73 +599,81 @@ void loop()
                 } else {
                     cout << "Fila o asiento fuera de rango.\n";
                 }
+
+                // Validar opción incorrecta
             } else if (opcion != '4') {
                 cout << "Opcion no valida.\n";
             }
 
-        } while (opcion != '4');
+        } while (opcion != '4');  // Repetir hasta que el usuario elija salir
     }
 
 
-
-
+    // Esta función verifica si una matriz 3x3 ingresada por el usuario
+    // forma un cuadrado mágico, es decir, que la suma de todas sus filas,
+    // columnas y diagonales sea la misma.
 void problema12() {
-    const int tam = 3;
-    int matriz[tam][tam];
+        const int tam = 3;                 // Tamaño de la matriz (3x3)
+        int matriz[tam][tam];              // Declaración de la matriz 3x3
 
-    cout << "Ingrese los 9 numeros de la matriz 3x3:\n";
-    for (int i = 0; i < tam; i++) {
-        for (int j = 0; j < tam; j++) {
-            cin >> matriz[i][j];
-        }
-    }
-
-    // Mostrar matriz
-    cout << "\nMatriz ingresada:\n";
-    for (int i = 0; i < tam; i++) {
-        for (int j = 0; j < tam; j++) {
-            cout << matriz[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    int sumaMagica = matriz[0][0] + matriz[0][1] + matriz[0][2];
-
-    // Verificar filas
-    for (int i = 0; i < tam; i++) {
-        int sumaFila = 0;
-        for (int j = 0; j < tam; j++) {
-            sumaFila += matriz[i][j];
-        }
-        if (sumaFila != sumaMagica) {
-            cout << "No es un cuadrado magico.\n";
-            return;
-        }
-    }
-
-    // Verificar columnas
-    for (int j = 0; j < tam; j++) {
-        int sumaCol = 0;
+        // Solicitar al usuario los 9 números para llenar la matriz
+        cout << "Ingrese los 9 numeros de la matriz 3x3:\n";
         for (int i = 0; i < tam; i++) {
-            sumaCol += matriz[i][j];
+            for (int j = 0; j < tam; j++) {
+                cin >> matriz[i][j];       // Leer cada elemento de la matriz
+            }
         }
-        if (sumaCol != sumaMagica) {
+
+        // Mostrar la matriz ingresada
+        cout << "\nMatriz ingresada:\n";
+        for (int i = 0; i < tam; i++) {
+            for (int j = 0; j < tam; j++) {
+                cout << matriz[i][j] << " ";
+            }
+            cout << endl;
+        }
+
+        // Calcular la suma de la primera fila como suma de referencia
+        int sumaMagica = matriz[0][0] + matriz[0][1] + matriz[0][2];
+
+        // Verificar que todas las filas tengan la misma suma
+        for (int i = 0; i < tam; i++) {
+            int sumaFila = 0;
+            for (int j = 0; j < tam; j++) {
+                sumaFila += matriz[i][j];
+            }
+            if (sumaFila != sumaMagica) {          // Si una fila no coincide, no es mágico
+                cout << "No es un cuadrado magico.\n";
+                return;
+            }
+        }
+
+        // Verificar que todas las columnas tengan la misma suma
+        for (int j = 0; j < tam; j++) {
+            int sumaCol = 0;
+            for (int i = 0; i < tam; i++) {
+                sumaCol += matriz[i][j];
+            }
+            if (sumaCol != sumaMagica) {           // Si una columna no coincide, no es mágico
+                cout << "No es un cuadrado magico.\n";
+                return;
+            }
+        }
+
+        // Verificar suma de la diagonal principal
+        int diag1 = matriz[0][0] + matriz[1][1] + matriz[2][2];
+        // Verificar suma de la diagonal secundaria
+        int diag2 = matriz[0][2] + matriz[1][1] + matriz[2][0];
+
+        // Si alguna de las diagonales no coincide con la suma mágica
+        if (diag1 != sumaMagica || diag2 != sumaMagica) {
             cout << "No es un cuadrado magico.\n";
             return;
         }
+
+        // Si todas las sumas coinciden, es un cuadrado mágico
+        cout << "¡Es un cuadrado magico!\n";
     }
-
-    // Verificar diagonales
-    int diag1 = matriz[0][0] + matriz[1][1] + matriz[2][2];
-    int diag2 = matriz[0][2] + matriz[1][1] + matriz[2][0];
-
-    if (diag1 != sumaMagica || diag2 != sumaMagica) {
-        cout << "No es un cuadrado magico.\n";
-        return;
-    }
-
-    cout << "¡Es un cuadrado magico!\n";
-}
 
 void problema14() {
     const int tamaño = 5;
