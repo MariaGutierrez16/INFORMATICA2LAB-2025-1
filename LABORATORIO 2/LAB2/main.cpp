@@ -530,56 +530,8 @@ void loop()
     }
 
 
-    void problema15(){
-        // Rectángulo A: {x, y, ancho, alto}
-        int A[4] = {0, 8, 4, 4};
-
-        // Rectángulo B: {x, y, ancho, alto}
-        int B[4] = {5, 6, 2, 7};
-
-        // Rectángulo C donde se guardará la intersección
-        int C[4];
-
-        // --- Cálculo de coordenadas de extremos de A ---
-        int ax1 = A[0];              // x1 de A (esquina superior izquierda)
-        int ay1 = A[1];              // y1 de A
-        int ax2 = ax1 + A[2];        // x2 de A (esquina inferior derecha en x)
-        int ay2 = ay1 - A[3];        // y2 de A (esquina inferior en y)
-
-        // --- Cálculo de coordenadas de extremos de B ---
-        int bx1 = B[0];              // x1 de B
-        int by1 = B[1];              // y1 de B
-        int bx2 = bx1 + B[2];        // x2 de B
-        int by2 = by1 - B[3];        // y2 de B
-
-        // --- Cálculo del área de intersección ---
-        int cx1 = max(ax1, bx1);     // x superior izquierda de la intersección
-        int cy1 = min(ay1, by1);     // y superior izquierda de la intersección
-        int cx2 = min(ax2, bx2);     // x inferior derecha de la intersección
-        int cy2 = max(ay2, by2);     // y inferior derecha de la intersección
-
-        // Si hay intersección válida (ancho y alto positivos)
-        if (cx1 < cx2 && cy2 < cy1) {
-            C[0] = cx1;              // x de la intersección
-            C[1] = cy1;              // y de la intersección
-            C[2] = cx2 - cx1;        // ancho de la intersección
-            C[3] = cy1 - cy2;        // alto de la intersección
-        } else {
-            // No hay intersección: rectángulo vacío
-            C[0] = C[1] = C[2] = C[3] = 0;
-        }
-
-        // --- Mostrar el resultado ---
-        cout << "Rectángulo intersección: [";
-        for (int i = 0; i < 4; i++) {
-            cout << C[i];           // Imprimir cada valor del arreglo C
-            if (i < 3) cout << ", ";
-        }
-        cout << "]" << endl;
 
 
-    }
-=======
 void problema12() {
     const int tam = 3;
     int matriz[tam][tam];
@@ -702,3 +654,158 @@ void problema14() {
     }
 }
 
+void problema15(){
+    // Rectángulo A: {x, y, ancho, alto}
+    int A[4] = {0, 8, 4, 4};
+
+    // Rectángulo B: {x, y, ancho, alto}
+    int B[4] = {5, 6, 2, 7};
+
+    // Rectángulo C donde se guardará la intersección
+    int C[4];
+
+    // --- Cálculo de coordenadas de extremos de A ---
+    int ax1 = A[0];              // x1 de A (esquina superior izquierda)
+    int ay1 = A[1];              // y1 de A
+    int ax2 = ax1 + A[2];        // x2 de A (esquina inferior derecha en x)
+    int ay2 = ay1 - A[3];        // y2 de A (esquina inferior en y)
+
+    // --- Cálculo de coordenadas de extremos de B ---
+    int bx1 = B[0];              // x1 de B
+    int by1 = B[1];              // y1 de B
+    int bx2 = bx1 + B[2];        // x2 de B
+    int by2 = by1 - B[3];        // y2 de B
+
+    // --- Cálculo del área de intersección ---
+    int cx1 = max(ax1, bx1);     // x superior izquierda de la intersección
+    int cy1 = min(ay1, by1);     // y superior izquierda de la intersección
+    int cx2 = min(ax2, bx2);     // x inferior derecha de la intersección
+    int cy2 = max(ay2, by2);     // y inferior derecha de la intersección
+
+    // Si hay intersección válida (ancho y alto positivos)
+    if (cx1 < cx2 && cy2 < cy1) {
+        C[0] = cx1;              // x de la intersección
+        C[1] = cy1;              // y de la intersección
+        C[2] = cx2 - cx1;        // ancho de la intersección
+        C[3] = cy1 - cy2;        // alto de la intersección
+    } else {
+        // No hay intersección: rectángulo vacío
+        C[0] = C[1] = C[2] = C[3] = 0;
+    }
+
+    // --- Mostrar el resultado ---
+    cout << "Rectángulo intersección: [";
+    for (int i = 0; i < 4; i++) {
+        cout << C[i];           // Imprimir cada valor del arreglo C
+        if (i < 3) cout << ", ";
+    }
+    cout << "]" << endl;
+
+
+}
+
+void problema16(){
+    //Formula (2n)! / (n!)(n!)
+    int n;
+
+    cout << "Ingrese el tamaño de la malla (n): ";
+    cin >> n;
+
+    // Variables para almacenar factoriales
+    long long factorial_2n = 1;  // (2n)!
+    long long factorial_n = 1;   // n!
+
+    // Calcular (2n)!
+    for(int i = 2*n; i >= 1; i--){
+        factorial_2n *=i;
+    }
+
+    // Calcular n!
+    for (int i = n; i >= 1; i--) {
+        factorial_n *= i;
+    }
+
+    long long caminos = factorial_2n / (factorial_n * factorial_n);
+
+    cout << "Para una malla de " << n << "x" << n << " puntos hay " << caminos << " caminos." << endl;
+}
+
+void problema17(){
+    int numUser;
+    int sumaDivA = 0;
+    int b = 0;
+    int sumaDivB = 0;
+
+    cout << "Ingrese un numero: ";
+    cin >> numUser;
+
+    for(int i = 1; i < numUser; i++){
+        if(numUser%i == 0){
+            sumaDivA += i;
+        }
+
+    }
+
+    b = sumaDivA;
+
+    for(int j = 1; j < b; j++)
+        if(b % j == 0){
+            sumaDivB += j;
+        }
+
+    if(sumaDivB == numUser){
+        cout << numUser << " y " << b << " son compatibles." << endl << "La suma de ellos da: " << (sumaDivA + numUser);
+    }
+
+}
+
+void problema18(){
+    long long numero; // El número de la permutación deseada
+    cout << "Introduce el número de permutación: ";
+    cin >> numero;
+
+    int digitos[10];      // Arreglo para los dígitos 0-9
+    bool usado[10];       // Arreglo para marcar si un dígito ya fue usado
+
+    // Inicializar los dígitos y marcar todos como disponibles
+    for (int i = 0; i < 10; i++) {
+        digitos[i] = i;
+        usado[i] = false;
+    }
+
+    numero--; // Ajustamos porque empezamos contando desde 0
+
+    // Calculamos 9! que es el número de permutaciones por dígito
+    long long factorial = 1;
+    for (int i = 9; i >= 1; i--) {
+        factorial *= i;
+    }
+
+    cout << "La permutación número " << (numero + 1) << " es: ";
+
+    // Elegimos cada dígito de la permutación uno por uno
+    for (int posiciones_restantes = 9; posiciones_restantes >= 0; posiciones_restantes--) {
+        int indice = numero / factorial; // Calculamos en qué bloque estamos
+        numero = numero % factorial;     // Actualizamos el número para la siguiente posición
+
+        // Actualizamos el factorial para el siguiente paso
+        if (posiciones_restantes != 0) {
+            factorial = factorial / posiciones_restantes;
+        }
+
+        // Ahora buscamos el índice-ésimo número disponible
+        int contador = -1;
+        for (int j = 0; j < 10; j++) {
+            if (!usado[j]) { // Si el dígito j no ha sido usado
+                contador++;
+            }
+            if (contador == indice) { // Cuando llegamos al dígito correcto
+                cout << j;             // Lo imprimimos
+                usado[j] = true;       // Lo marcamos como usado
+                break;                 // Salimos del ciclo
+            }
+        }
+    }
+
+    cout << endl;
+}
