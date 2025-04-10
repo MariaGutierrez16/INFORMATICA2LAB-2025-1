@@ -74,7 +74,7 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
 
 }
 
-//ejercicio 3
+//ejercicio 3  Encontrar direcciones en memoria y valores de variables
 
 //int main() {
     unsigned short b[4][2] = {
@@ -99,7 +99,7 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
 //}
 
 
-/*  Ejercicio 4
+/*  Ejercicio 4 LED con potenciometro
 
 int potPin = A0;       // Pin analógico donde está el potenciómetro
 int ledAzul = 3;        // Pin PWM donde está conectado el LED
@@ -117,7 +117,7 @@ void loop() {
   delay(10);                               // Pequeña pausa para estabilidad
 }
 
-Ejercicio 5
+Ejercicio 5  Mostrar mensaje en pantalla LCD
 
 #include <LiquidCrystal.h>
 
@@ -156,7 +156,7 @@ void loop()
 
  */
 
-    void problema1(){
+    void problema1(){ //Maquina de cambio de dinero
 
         int billetes[6] = {0}; // Para almacenar los billetes de 1000, 2000, 5000, 10000, 20000, 50000
         int monedas[4] = {0};  // Para almacenar las monedas de 50, 100, 200, 500
@@ -198,7 +198,7 @@ void loop()
         cout << "Faltante: " << faltante << endl;
 
     }
-    void problema2() {
+    void problema2() { //Generar 200 letras mayusculas aleatorias
         srand(time(0));
 
         const int tamaño = 200;
@@ -232,8 +232,8 @@ void loop()
     }
 
 
-    // Función que compara dos cadenas de caracteres para determinar si son iguales o diferentes
-    void problema3() {
+    void problema3() { //Comparar 2 cadenas y devolver True/ False si son iguales
+
         char a[100], b[100];  // Arreglos para almacenar las dos cadenas (máximo 99 caracteres cada una)
         int i = 0;            // Índice para recorrer las cadenas
 
@@ -262,8 +262,8 @@ void loop()
         }
     }
 
-    // Función que convierte una cadena de caracteres numéricos a un número entero
-    void problema4() {
+
+    void problema4() {//Convertir de str a int
         char texto[100];          // Arreglo para almacenar la cadena ingresada (máximo 99 caracteres + terminador nulo)
         int numero = 0, i = 0;    // Variables: 'numero' para acumular el resultado y 'i' como índice para recorrer el texto
 
@@ -282,8 +282,7 @@ void loop()
     }
 
 
-    // Función que convierte un número entero a una cadena de caracteres
-    void problema5() {
+    void problema5() { //Convertir de int a str
         int numero;
         char cadena[20];  // Arreglo donde se almacenará la cadena resultante
         char temp[20];    // Arreglo temporal para almacenar los dígitos en orden inverso
@@ -319,8 +318,7 @@ void loop()
     }
 
 
-    // Función que convierte una cadena ingresada a mayúsculas carácter por carácter
-    void problema6() {
+    void problema6() { //Cambiar letras de minusculas a mayusculas
         char texto[100];       // Arreglo para almacenar la cadena original ingresada por el usuario
         char mayuscula[100];   // Arreglo para almacenar la versión en mayúsculas
         int i = 0;             // Índice para recorrer los arreglos
@@ -348,8 +346,7 @@ void loop()
     }
 
 
-    // Función que elimina los caracteres repetidos de una cadena
-    void problema7() {
+    void problema7() { //Quitar caracteres repetidos
         char original[100];        // Arreglo para la cadena original ingresada
         char sinRepetidos[100];    // Arreglo para almacenar la cadena sin caracteres repetidos
         int i = 0, j = 0, k;       // 'i' recorre original, 'j' controla el índice de sinRepetidos, 'k' para buscar repeticiones
@@ -386,8 +383,7 @@ void loop()
     }
 
 
-    // Función que separa los dígitos numéricos y las letras/otros caracteres de una cadena
-    void problema8() {
+    void problema8() { //Separa los numeros de los caracteres
         char original[100], texto[100], numero[100];  // original: entrada, texto: letras y otros, numero: solo dígitos
         int i = 0, j = 0, k = 0;  // i: recorre original, j: índice para número, k: índice para texto
 
@@ -417,8 +413,7 @@ void loop()
     }
 
 
-    // Función que agrupa una cadena numérica en bloques de n cifras, los convierte a enteros y los suma
-    void problema9() {
+    void problema9() { //Separar por grupos de 3 a numeros que estan en una cadena y sumarlos
         int n, indice = 0, suma = 0, longitud = 0;
         char cadena[100], copia[100];  // cadena: entrada original, copia: respaldo de la cadena modificada
 
@@ -475,8 +470,8 @@ void loop()
     }
 
 
-    // Función que convierte un número romano (en mayúsculas) a número entero
-    void problema10() {
+
+    void problema10() {//Convertir numeros a romano
         char romano[100];       // Arreglo para almacenar el número romano ingresado
         int valores[100];       // Arreglo que guardará los valores equivalentes de cada letra romana
         int total = 0;          // Acumulador para el número entero resultante
@@ -675,7 +670,7 @@ void problema12() {
         cout << "¡Es un cuadrado magico!\n";
     }
 
-void problema14() {
+void problema14() {//Recibe una matriz 5x5 y muestra los resultados al rotarla 90,180 y 270 grados
     const int tamaño = 5;
     int matriz[tamaño][tamaño];
     int numeros[25];
@@ -739,7 +734,7 @@ void problema14() {
     }
 }
 
-void problema15(){
+void problema15(){ //Encontrar la interseccion entre 2 rectangulos
     // Rectángulo A: {x, y, ancho, alto}
     int A[4] = {0, 8, 4, 4};
 
@@ -789,7 +784,7 @@ void problema15(){
 
 }
 
-void problema16(){
+void problema16(){//Encontrar camino para llegar desde la esquian sup izq. a esquina inf. der
     //Formula (2n)! / (n!)(n!)
     int n;
 
@@ -815,7 +810,7 @@ void problema16(){
     cout << "Para una malla de " << n << "x" << n << " puntos hay " << caminos << " caminos." << endl;
 }
 
-void problema17(){
+void problema17(){//Encontrar numeros amigables
     int numUser;
     int sumaDivA = 0; //Almacena la suma de los divisores de numUser
     int b = 0;
@@ -846,7 +841,7 @@ void problema17(){
 
 }
 
-void problema18(){
+void problema18(){//Encontrar permutaciones lexicograficas
     long long numero; // El número de la permutación deseada
     cout << "Introduce el número de permutación: ";
     cin >> numero;
