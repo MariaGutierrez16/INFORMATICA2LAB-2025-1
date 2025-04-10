@@ -28,7 +28,7 @@ void problema18();
 
 int main()
 {
-    problema11();
+    problema14();
 
     return 0;
 }
@@ -469,3 +469,124 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
 
         } while (opcion != '4');
     }
+void problema12() {
+    const int tam = 3;
+    int matriz[tam][tam];
+
+    cout << "Ingrese los 9 numeros de la matriz 3x3:\n";
+    for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam; j++) {
+            cin >> matriz[i][j];
+        }
+    }
+
+    // Mostrar matriz
+    cout << "\nMatriz ingresada:\n";
+    for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam; j++) {
+            cout << matriz[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    int sumaMagica = matriz[0][0] + matriz[0][1] + matriz[0][2];
+
+    // Verificar filas
+    for (int i = 0; i < tam; i++) {
+        int sumaFila = 0;
+        for (int j = 0; j < tam; j++) {
+            sumaFila += matriz[i][j];
+        }
+        if (sumaFila != sumaMagica) {
+            cout << "No es un cuadrado magico.\n";
+            return;
+        }
+    }
+
+    // Verificar columnas
+    for (int j = 0; j < tam; j++) {
+        int sumaCol = 0;
+        for (int i = 0; i < tam; i++) {
+            sumaCol += matriz[i][j];
+        }
+        if (sumaCol != sumaMagica) {
+            cout << "No es un cuadrado magico.\n";
+            return;
+        }
+    }
+
+    // Verificar diagonales
+    int diag1 = matriz[0][0] + matriz[1][1] + matriz[2][2];
+    int diag2 = matriz[0][2] + matriz[1][1] + matriz[2][0];
+
+    if (diag1 != sumaMagica || diag2 != sumaMagica) {
+        cout << "No es un cuadrado magico.\n";
+        return;
+    }
+
+    cout << "¡Es un cuadrado magico!\n";
+}
+
+void problema14() {
+    const int tamaño = 5;
+    int matriz[tamaño][tamaño];
+    int numeros[25];
+
+    // Llenar el arreglo con números del 1 al 25
+    for (int i = 0; i < 25; i++) {
+        numeros[i] = i + 1;
+    }
+
+    // Mezclar los números aleatoriamente
+    srand(time(0));
+    for (int i = 0; i < 25; i++) {
+        int j = rand() % 25;
+        int temp = numeros[i];
+        numeros[i] = numeros[j];
+        numeros[j] = temp;
+    }
+
+    // Llenar la matriz con los números aleatorios sin repetir
+    int pos = 0;
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            matriz[i][j] = numeros[pos++];
+        }
+    }
+
+    // Imprimir matriz original
+    cout << "Matriz original:\n";
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            cout << matriz[i][j] << "\t";
+        }
+        cout << "\n";
+    }
+
+    // Rotar 90 grados
+    cout << "\nMatriz rotada 90 grados:\n";
+    for (int j = 0; j < tamaño; j++) {
+        for (int i = tamaño - 1; i >= 0; i--) {
+            cout << matriz[i][j] << "\t";
+        }
+        cout << "\n";
+    }
+
+    // Rotar 180 grados
+    cout << "\nMatriz rotada 180 grados:\n";
+    for (int i = tamaño - 1; i >= 0; i--) {
+        for (int j = tamaño - 1; j >= 0; j--) {
+            cout << matriz[i][j] << "\t";
+        }
+        cout << "\n";
+    }
+
+    // Rotar 270 grados
+    cout << "\nMatriz rotada 270 grados:\n";
+    for (int j = tamaño - 1; j >= 0; j--) {
+        for (int i = 0; i < tamaño; i++) {
+            cout << matriz[i][j] << "\t";
+        }
+        cout << "\n";
+    }
+}
