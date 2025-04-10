@@ -69,6 +69,18 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
         {99, 3}
     };
 
+
+    /*
+    b                -> direccion: 0x0A12
+    b + 2            -> direccion: 0xA1A
+    *(b + 2)         -> = 28  Apunta a b[2][0]
+    *(b + 2) + 1     -> = 39
+    *(*(b + 2) + 1)  -> = 39
+    b[3][1]          -> = 3
+    *b++             -> = 77
+    */
+
+
     //cout << "b         = " << b << endl;
     //cout << "b + 2     = " << b + 2 << endl;
     //cout << "*(b + 2)  = " << *(b + 2) << endl;
@@ -81,6 +93,64 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
 
     //return 0;
 //}
+
+
+/*  Ejercicio 4
+
+int potPin = A0;       // Pin analógico donde está el potenciómetro
+int ledAzul = 3;        // Pin PWM donde está conectado el LED
+int valorPot = 0;      // Valor leído del potenciómetro (0-1023)
+int brillo = 0;        // Valor convertido para PWM (0-255)
+
+void setup() {
+  pinMode(ledAzul, OUTPUT);  // El pin del LED es salida
+}
+
+void loop() {
+  valorPot = analogRead(potPin);            // Leer valor del potenciómetro (0-1023)
+  brillo = map(valorPot, 0, 1023, 0, 255);  // Convertir a rango PWM (0-255)
+  analogWrite(ledAzul, brillo);             // Escribir el brillo al LED
+  delay(10);                               // Pequeña pausa para estabilidad
+}
+
+Ejercicio 5
+
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(2,3,4,5,6,7);
+String msgUser = "";
+
+void setup()
+{
+  lcd.begin(16,2); //Inicia el sistema con 16 columnas y 2 filas
+  Serial.begin(9600);
+  lcd.print("Hola soy Arduino, escribe un msg");
+}
+
+void loop()
+{
+
+
+  if (Serial.available()) {
+    msgUser = Serial.readStringUntil('\n');  // Leer hasta ENTER
+
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(msgUser);
+    lcd.setCursor(0, 1);
+
+    lcd.print("");
+
+    Serial.println("Mensaje exitoso en LCD.");
+  }
+
+  lcd.scrollDisplayLeft();
+  delay(300);
+
+}
+
+
+ */
 
     void problema1(){
 
@@ -468,4 +538,54 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
             }
 
         } while (opcion != '4');
+    }
+
+    void problema15(){
+        // Rectángulo A: {x, y, ancho, alto}
+        int A[4] = {0, 8, 4, 4};
+
+        // Rectángulo B: {x, y, ancho, alto}
+        int B[4] = {5, 6, 2, 7};
+
+        // Rectángulo C donde se guardará la intersección
+        int C[4];
+
+        // --- Cálculo de coordenadas de extremos de A ---
+        int ax1 = A[0];              // x1 de A (esquina superior izquierda)
+        int ay1 = A[1];              // y1 de A
+        int ax2 = ax1 + A[2];        // x2 de A (esquina inferior derecha en x)
+        int ay2 = ay1 - A[3];        // y2 de A (esquina inferior en y)
+
+        // --- Cálculo de coordenadas de extremos de B ---
+        int bx1 = B[0];              // x1 de B
+        int by1 = B[1];              // y1 de B
+        int bx2 = bx1 + B[2];        // x2 de B
+        int by2 = by1 - B[3];        // y2 de B
+
+        // --- Cálculo del área de intersección ---
+        int cx1 = max(ax1, bx1);     // x superior izquierda de la intersección
+        int cy1 = min(ay1, by1);     // y superior izquierda de la intersección
+        int cx2 = min(ax2, bx2);     // x inferior derecha de la intersección
+        int cy2 = max(ay2, by2);     // y inferior derecha de la intersección
+
+        // Si hay intersección válida (ancho y alto positivos)
+        if (cx1 < cx2 && cy2 < cy1) {
+            C[0] = cx1;              // x de la intersección
+            C[1] = cy1;              // y de la intersección
+            C[2] = cx2 - cx1;        // ancho de la intersección
+            C[3] = cy1 - cy2;        // alto de la intersección
+        } else {
+            // No hay intersección: rectángulo vacío
+            C[0] = C[1] = C[2] = C[3] = 0;
+        }
+
+        // --- Mostrar el resultado ---
+        cout << "Rectángulo intersección: [";
+        for (int i = 0; i < 4; i++) {
+            cout << C[i];           // Imprimir cada valor del arreglo C
+            if (i < 3) cout << ", ";
+        }
+        cout << "]" << endl;
+
+
     }
