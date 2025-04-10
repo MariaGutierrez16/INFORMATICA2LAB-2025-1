@@ -87,7 +87,7 @@ void fun_c(double *a, int n, double *promedio, double *suma) {
 
     /*
     b                -> direccion: 0x0A12
-    b + 2            -> direccion: 0xA1A
+    b + 2            -> direccion: 0xA1A    Por notacion hexadecimal
     *(b + 2)         -> = 28  Apunta a b[2][0]
     *(b + 2) + 1     -> = 39
     *(*(b + 2) + 1)  -> = 39
@@ -817,14 +817,14 @@ void problema16(){
 
 void problema17(){
     int numUser;
-    int sumaDivA = 0;
+    int sumaDivA = 0; //Almacena la suma de los divisores de numUser
     int b = 0;
-    int sumaDivB = 0;
+    int sumaDivB = 0; //Almacena la suma de los divisores de b
 
     cout << "Ingrese un numero: ";
     cin >> numUser;
 
-    for(int i = 1; i < numUser; i++){
+    for(int i = 1; i < numUser; i++){ //Encontrar divisores de numUser
         if(numUser%i == 0){
             sumaDivA += i;
         }
@@ -833,13 +833,15 @@ void problema17(){
 
     b = sumaDivA;
 
-    for(int j = 1; j < b; j++)
+    for(int j = 1; j < b; j++) //Encontrar divisores de la sumaDivA
         if(b % j == 0){
             sumaDivB += j;
         }
 
-    if(sumaDivB == numUser){
+    if(sumaDivB == numUser){ //Si son iguales entonces son compatibles
         cout << numUser << " y " << b << " son compatibles." << endl << "La suma de ellos da: " << (sumaDivA + numUser);
+    }else{
+        cout << "No son compatibles.";
     }
 
 }
