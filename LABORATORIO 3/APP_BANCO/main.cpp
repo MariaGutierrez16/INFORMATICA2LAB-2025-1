@@ -3,8 +3,9 @@
 #include <QFile>
 #include <QCryptographicHash>
 #include <QDebug>
+#include <QStringList>
 
-// Funcion para encriptar la clave con SHA-256
+// Funcion para encriptar una clave con SHA-256
 QString encriptarClave(const QString &clave) {
     QByteArray hash = QCryptographicHash::hash(clave.toUtf8(), QCryptographicHash::Sha256);
     return hash.toHex();
@@ -16,17 +17,15 @@ void crearClaveAdminSiNoExiste() {
     if (!archivo.exists()) {
         QString claveAdmin = "$admin123*";
         QString hash = encriptarClave(claveAdmin);
-
         if (archivo.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream out(&archivo);
             out << hash;
             archivo.close();
-            qDebug() << "Archivo sudo.txt creado con la clave encriptada.";
         }
     }
 }
 
-// Verifica si la clave ingresada coincide con la clave guardada
+// Verifica si la clave ingresada coincide con la guardada
 bool validarClaveAdmin(const QString &claveIngresada) {
     QFile archivo("sudo.txt");
     if (!archivo.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -36,11 +35,10 @@ bool validarClaveAdmin(const QString &claveIngresada) {
 
     QString claveGuardada = QString::fromUtf8(archivo.readAll()).trimmed();
     QString claveIngresadaHash = encriptarClave(claveIngresada);
-
     return claveGuardada == claveIngresadaHash;
 }
 
-// Registra un nuevo usuario con cedula, clave y saldo
+// Permite registrar un nuevo usuario
 void registrarUsuario() {
     QTextStream cin(stdin);
     QTextStream cout(stdout);
@@ -70,7 +68,7 @@ void registrarUsuario() {
     }
 }
 
-// Menu que aparece al ingresar como administrador
+// Menu de administrador con opcion para registrar usuarios
 void menuAdministrador() {
     QTextStream cin(stdin);
     QTextStream cout(stdout);
@@ -95,7 +93,130 @@ void menuAdministrador() {
     }
 }
 
-// Menu principal del sistema
+// Menu para usuarios (consultar saldo, retirar)
+void menuUsuario(const QString &cedula) {
+    QTextStream cin(stdin);
+    QTextStream cout(stdout);
+
+    while (true) {
+        QFile archivo("usuarios.txt");
+        if (!archivo.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            cout << "[ERROR] No se pudo abrir usuarios.txt\n";
+            return;
+        }
+
+        QStringList lineas;
+        QString lineaUsuario;
+        while (!archivo.atEnd()) {
+            QString linea = archivo.readLine().trimmed();
+            if (linea.startsWith(cedula + "|")) {
+                lineaUsuario = linea;
+            }
+            lineas.append(linea);
+        }
+        archivo.close();
+
+        if (lineaUsuario.isEmpty()) {
+            cout << "[ERROR] Usuario no encontrado.\n";
+            return;
+        }
+
+        QStringList partes = lineaUsuario.split("|");
+        QString claveHash = partes[1];
+        double saldo = partes[2].toDouble();
+
+        cout << "\n--- Menu Usuario ---\n";
+        cout << "1. Consultar saldo (costo 1000 COP)\n";
+        cout << "2. Retirar dinero (costo adicional 1000 COP)\n";
+        cout << "3. Salir\n";
+        cout << "Opcion: ";
+        cout.flush();
+        QString opcion = cin.readLine().trimmed();
+
+        if (opcion == "1") {
+            if (saldo >= 1000) {
+                saldo -= 1000;
+                cout << "Saldo actual: " << saldo << " COP\n";
+            } else {
+                cout << "[ERROR] Saldo insuficiente para consultar.\n";
+            }
+        } else if (opcion == "2") {
+            cout << "Ingrese monto a retirar: ";
+            cout.flush();
+            double monto = cin.readLine().toDouble();
+
+            double total = monto + 1000;
+            if (saldo >= total) {
+                saldo -= total;
+                cout << "Retiro exitoso. Saldo restante: " << saldo << " COP\n";
+            } else {
+                cout << "[ERROR] Saldo insuficiente para retirar.\n";
+            }
+        } else if (opcion == "3") {
+            break;
+        } else {
+            cout << "[ERROR] Opcion invalida.\n";
+            continue;
+        }
+
+        // Actualizar archivo con nuevo saldo
+        for (int i = 0; i < lineas.size(); ++i) {
+            if (lineas[i].startsWith(cedula + "|")) {
+                lineas[i] = cedula + "|" + claveHash + "|" + QString::number(saldo);
+                break;
+            }
+        }
+
+        if (archivo.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+            QTextStream out(&archivo);
+            for (const QString &linea : lineas) {
+                out << linea << "\n";
+            }
+            archivo.close();
+        }
+    }
+}
+
+// Validar usuario con cedula y clave
+void accesoUsuario() {
+    QTextStream cin(stdin);
+    QTextStream cout(stdout);
+
+    cout << "Ingrese su cedula: ";
+    cout.flush();
+    QString cedula = cin.readLine().trimmed();
+
+    cout << "Ingrese su clave: ";
+    cout.flush();
+    QString clave = cin.readLine().trimmed();
+    QString claveHash = encriptarClave(clave);
+
+    QFile archivo("usuarios.txt");
+    if (!archivo.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        cout << "[ERROR] No se pudo abrir usuarios.txt\n";
+        return;
+    }
+
+    bool encontrado = false;
+    while (!archivo.atEnd()) {
+        QString linea = archivo.readLine().trimmed();
+        QStringList partes = linea.split("|");
+        if (partes.size() == 3 && partes[0] == cedula && partes[1] == claveHash) {
+            encontrado = true;
+            break;
+        }
+    }
+    archivo.close();
+
+    if (encontrado) {
+        cout << "[OK] Acceso concedido.\n";
+        menuUsuario(cedula);
+    } else {
+        cout << "[ERROR] Cedula o clave incorrecta.\n";
+    }
+}
+
+// Menu principal
 void menuPrincipal() {
     QTextStream cin(stdin);
     QTextStream cout(stdout);
@@ -106,7 +227,7 @@ void menuPrincipal() {
         cout << "\n=== Bienvenido al sistema de cajero electronico ===\n";
         cout << "Seleccione una opcion:\n";
         cout << "1. Ingresar como administrador\n";
-        cout << "2. Ingresar como usuario (sin implementar)\n";
+        cout << "2. Ingresar como usuario\n";
         cout << "3. Salir\n";
         cout << "Opcion: ";
         cout.flush();
@@ -126,7 +247,7 @@ void menuPrincipal() {
             }
 
         } else if (opcion == "2") {
-            cout << "[INFO] La funcionalidad de usuario aun no esta implementada.\n";
+            accesoUsuario();
         } else if (opcion == "3") {
             cout << "Gracias por usar el sistema. Hasta pronto.\n";
             break;
@@ -136,10 +257,10 @@ void menuPrincipal() {
     }
 }
 
-int main(int argc, char *argv[])
-{
+// Funcion principal
+int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
-    crearClaveAdminSiNoExiste(); // Crea la clave si no existe
-    menuPrincipal();             // Muestra el menu principal
+    crearClaveAdminSiNoExiste();
+    menuPrincipal();
     return 0;
 }
