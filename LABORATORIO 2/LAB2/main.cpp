@@ -28,7 +28,7 @@ void problema18();
 
 int main()
 {
-    problema14();
+    problema7();
 
     return 0;
 }
@@ -121,13 +121,13 @@ Ejercicio 5  Mostrar mensaje en pantalla LCD
 
 #include <LiquidCrystal.h>
 
-LiquidCrystal lcd(2,3,4,5,6,7);
-String msgUser = "";
+LiquidCrystal lcd(2,3,4,5,6,7);   //Inicia los puertos del arduino desde el 2 hasta el 7
+String msgUser = "";  //Inicializa la variable msgUser
 
 void setup()
 {
   lcd.begin(16,2); //Inicia el sistema con 16 columnas y 2 filas
-  Serial.begin(9600);
+  Serial.begin(9600); //Inicializa el serial
   lcd.print("Hola soy Arduino, escribe un msg");
 }
 
@@ -136,19 +136,18 @@ void loop()
 
 
   if (Serial.available()) {
-    msgUser = Serial.readStringUntil('\n');  // Leer hasta ENTER
+    msgUser = Serial.readStringUntil('\n');  // Leer hasta que se oprima enter
 
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(msgUser);
+    lcd.clear();  //limpia la pantalla
+    lcd.setCursor(0, 0); //pone el cursor de la pantalla en el inicio para mostrar mensaje nuevo
+    lcd.print(msgUser); //Muestra el mensaje que envio el usuario
     lcd.setCursor(0, 1);
 
     lcd.print("");
 
-    Serial.println("Mensaje exitoso en LCD.");
-  }
+    Serial.println("Mensaje exitoso en LCD."); //muestra mensaje exitoso en consola
 
-  lcd.scrollDisplayLeft();
+  lcd.scrollDisplayLeft();  //hace que los mensajes se desplacen hacia la izq.
   delay(300);
 
 }
