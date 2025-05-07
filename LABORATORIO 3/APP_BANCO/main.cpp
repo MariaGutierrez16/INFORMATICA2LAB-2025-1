@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QStringList>
 
+
 // Funcion para encriptar una clave con SHA-256
 QString encriptarClave(const QString &clave) {
     QByteArray hash = QCryptographicHash::hash(clave.toUtf8(), QCryptographicHash::Sha256);
@@ -36,6 +37,34 @@ bool validarClaveAdmin(const QString &claveIngresada) {
     QString claveGuardada = QString::fromUtf8(archivo.readAll()).trimmed();
     QString claveIngresadaHash = encriptarClave(claveIngresada);
     return claveGuardada == claveIngresadaHash;
+}
+
+void cambiarClaveAdmin() {
+    QTextStream cin(stdin);
+    QTextStream cout(stdout);
+
+    cout << "¿Desea cambiar la clave del administrador? (s/n): ";
+    cout.flush();
+    QString respuesta = cin.readLine().trimmed().toLower();
+
+    if (respuesta == "s") {
+        cout << "Ingrese la nueva clave para el administrador: ";
+        cout.flush();
+        QString nuevaClave = cin.readLine().trimmed();
+        QString nuevaHash = encriptarClave(nuevaClave);
+
+        QFile archivo("sudo.txt");
+        if (archivo.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+            QTextStream out(&archivo);
+            out << nuevaHash;
+            archivo.close();
+            cout << "[OK] Clave del administrador actualizada exitosamente.\n";
+        } else {
+            cout << "[ERROR] No se pudo escribir en sudo.txt\n";
+        }
+    } else {
+        cout << "La clave del administrador no fue modificada.\n";
+    }
 }
 
 // Permite registrar un nuevo usuario
@@ -77,7 +106,8 @@ void menuAdministrador() {
     while (true) {
         cout << "\n--- Menu Administrador ---\n";
         cout << "1. Registrar usuario\n";
-        cout << "2. Volver al menu principal\n";
+        cout << "2. Cambiar clave del administrador\n";
+        cout << "3. Volver al menu principal\n";
         cout << "Opcion: ";
         cout.flush();
 
@@ -86,6 +116,8 @@ void menuAdministrador() {
         if (opcion == "1") {
             registrarUsuario();
         } else if (opcion == "2") {
+            cambiarClaveAdmin();
+        } else if (opcion == "3") {
             break;
         } else {
             cout << "[ERROR] Opcion invalida. Intente de nuevo.\n";
@@ -263,4 +295,6 @@ int main(int argc, char *argv[]) {
     crearClaveAdminSiNoExiste();
     menuPrincipal();
     return 0;
-}
+
+
+
