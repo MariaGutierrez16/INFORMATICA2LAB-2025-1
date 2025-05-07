@@ -295,6 +295,4 @@ int main(int argc, char *argv[]) {
     crearClaveAdminSiNoExiste();
     menuPrincipal();
     return 0;
-
-
-
+}
